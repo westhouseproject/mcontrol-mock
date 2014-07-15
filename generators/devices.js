@@ -39,6 +39,71 @@ function bcpm(id) {
   };
 }
 
+function solarPV(id) {
+  return [
+    {
+      Id: 137,
+      Name: "Current",
+      Order: 0,
+      Adapter: "XantrexGT",
+      Address: "COM5",
+      Image: "Light EU",
+      Module: "Current",
+      NotifyFlags: 32767,
+      Options: "",
+      Protocol: "XantrexGT",
+      Status: "0",
+      Visible: true,
+      ZoneID: 0
+    },
+    {
+      Id: 138,
+      Name: "Voltage",
+      Order: 0,
+      Adapter: "XantrexGT",
+      Address: "COM5",
+      Image: "Light EU",
+      Module: "Voltage",
+      NotifyFlags: 32767,
+      Options: "",
+      Protocol: "XantrexGT",
+      Status: "0",
+      Visible: true,
+      ZoneID: 0
+    },
+    {
+      Id: 139,
+      Name: "Power",
+      Order: 0,
+      Adapter: "XantrexGT",
+      Address: "COM5",
+      Image: "Light EU",
+      Module: "Power",
+      NotifyFlags: 32767,
+      Options: "",
+      Protocol: "XantrexGT",
+      Status: "0",
+      Visible: true,
+      ZoneID: 0
+    },
+    {
+      Id: 140,
+      Name: "Energy",
+      Order: 0,
+      Adapter: "XantrexGT",
+      Address: "COM5",
+      Image: "Light EU",
+      Module: "Energy",
+      NotifyFlags: 32767,
+      Options: "",
+      Protocol: "XantrexGT",
+      Status: "0",
+      Visible: true,
+      ZoneID: 0
+    }
+  ];
+}
+
 // Generates a light switch INSTEON device.
 function lightSwitch(id) {
   if (typeof id != 'number') {
@@ -63,7 +128,7 @@ function lightSwitch(id) {
   }
 }
 
-var output = { bcpm: [], light_switches: [] };
+var output = { bcpm: [], light_switches: [], solar_pv: [] };
 for (var i = 0; i < 42; i++) {
   output.bcpm.push(bcpm(i + 1));
 }
@@ -74,5 +139,9 @@ var max = i + 8;
 for (; i < max; i++) {
   output.light_switches.push(lightSwitch(i));
 }
+
+solarPV().forEach(function (value) {
+  output.solar_pv.push(value);
+});
 
 process.stdout.write(JSON.stringify(output));

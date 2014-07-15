@@ -22,6 +22,22 @@ var arr = [];
   devices.light_switches.forEach(function (device) {
     arr.push(device);
   });
+  devices.solar_pv && devices.solar_pv.forEach(function (values) {
+    var status = Math.random() * 0.02;
+    switch (values.Name) {
+      case 'Current':
+        values.Status = status.toString();
+        break;
+      case 'Voltage':
+        values.Status = status.toString();
+        break;
+      case 'Power':
+        values.Status = status.toString();
+      case 'Energy':
+        values.Status = (parseFloat(values.Status) + status).toString();
+    }
+    arr.push(values);
+  });
 
   fs.writeFile('devices.json', JSON.stringify(devices), 'utf8');
 
